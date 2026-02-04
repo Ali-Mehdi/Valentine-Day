@@ -173,11 +173,17 @@
     const music = document.getElementById('music');
 
     function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 150);
-      const y = Math.random() * (window.innerHeight - 150);
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
-      noBtn.style.transform = `rotate(${Math.random() * 360}deg)`;
+  const container = document.querySelector('.buttons');
+
+  const maxX = container.clientWidth - noBtn.offsetWidth;
+  const maxY = container.clientHeight - noBtn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
+  noBtn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
     }
 
     noBtn.addEventListener('mouseenter', moveNoButton);
