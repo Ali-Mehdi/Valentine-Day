@@ -35,7 +35,9 @@
 
     .buttons {
       position: relative;
+      width: 320px;
       height: 280px;
+      margin: auto;
     }
 
     button {
@@ -72,12 +74,12 @@
       position: fixed;
       inset: 0;
       background: radial-gradient(circle, #ff9a9e, #ff2f6e);
+      z-index: 999;
+      padding: 25px;
+      overflow-y: auto;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      z-index: 999;
-      padding: 25px;
-      overflow: hidden;
     }
 
     .celebrate h2 {
@@ -102,21 +104,30 @@
       to { transform: scale(1.1); }
     }
 
+    /* ❤️ HEART RAIN */
+    .heart-rain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 10;
+    }
+
     .heart {
       position: absolute;
       font-size: 2.2rem;
       animation: fall linear infinite;
-      pointer-events: none;
+      opacity: 0.95;
     }
 
     @keyframes fall {
       from {
-        transform: translateY(-100px) rotate(0deg);
+        transform: translateY(-60px) rotate(0deg);
         opacity: 1;
       }
       to {
         transform: translateY(120vh) rotate(360deg);
-        opacity: 0.9;
+        opacity: 0.85;
       }
     }
   </style>
@@ -142,26 +153,24 @@
     <p>
       Love you my sweetest, softest, most precious sweetheart 💖  
       <br><br>
-      I want you to know this with every beat of my heart —  
-      I love you **more than myself**, more than words, more than time itself.  
-      I genuinely cannot imagine my world without you in it.  
+      I love you more than myself, more than words, more than time itself.  
+      I cannot imagine my world without you in it.  
       <br><br>
-      You are my Valentine **forever ♾️🩷**, my peace, my solace,  
-      my divine affection sent straight from the heavens.  
-      You’re my angel, my miracle, my everything.  
+      You are my Valentine forever ♾️🩷 — my peace, my solace,  
+      my divine affection, my angel, my everything.  
       <br><br>
-      I promise with all my heart —  
-      I will never let you down, never walk away, never stop choosing you.  
-      <br><br>
-      You’re my creamy sugar honey bunny 🍯  
+      My creamy sugar honey bunny 🍯  
       my apple pie 🥧  
       my moonlight 🌙  
       my crown 👑  
-      my eternal happiness and my eternal love 🌹💓🫠💋💞
+      my eternal happiness and eternal love 🌹💓🫠💋💞
     </p>
   </div>
 
-  <!-- Romantic Hindi Music -->
+  <!-- ❤️ HEART CONTAINER -->
+  <div class="heart-rain" id="heartRain"></div>
+
+  <!-- 🎶 MUSIC -->
   <audio id="music" loop>
     <source src="https://cdn.pixabay.com/download/audio/2023/03/09/audio_6b6b1f6a72.mp3" type="audio/mpeg">
   </audio>
@@ -171,19 +180,14 @@
     const yesBtn = document.getElementById('yes');
     const celebrate = document.getElementById('celebrate');
     const music = document.getElementById('music');
+    const heartRainContainer = document.getElementById('heartRain');
 
     function moveNoButton() {
-  const container = document.querySelector('.buttons');
-
-  const maxX = container.clientWidth - noBtn.offsetWidth;
-  const maxY = container.clientHeight - noBtn.offsetHeight;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-  noBtn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+      const container = document.querySelector('.buttons');
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
+      noBtn.style.left = Math.random() * maxX + 'px';
+      noBtn.style.top = Math.random() * maxY + 'px';
     }
 
     noBtn.addEventListener('mouseenter', moveNoButton);
@@ -192,20 +196,29 @@
 
     yesBtn.addEventListener('click', () => {
       celebrate.style.display = 'flex';
-      music.play();
-      heartRain();
+
+      music.volume = 0.7;
+      music.play().catch(() => {});
+
+      startHeartRain();
     });
 
-    function heartRain() {
-      const hearts = ['❤️','💖','💘','💕','💞','😍','🌹','👑'];
-      for (let i = 0; i < 200; i++) {
-        const h = document.createElement('div');
-        h.classList.add('heart');
-        h.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-        h.style.left = Math.random() * 100 + 'vw';
-        h.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-        document.body.appendChild(h);
-      }
+    function startHeartRain() {
+      heartRainContainer.style.display = 'block';
+
+      const hearts = ['❤️','💖','💕','💘','💞','😍','🌹','👑'];
+
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+
+        heartRainContainer.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 150);
     }
   </script>
 
