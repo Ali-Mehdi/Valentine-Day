@@ -41,3 +41,37 @@ function heartRain() {
     setTimeout(() => heart.remove(), 6000);
   }, 180); // rain intensity
 }
+const loveMessage = `
+Love you my sweetest, softest, most precious sweetheart 💖
+
+I want you to know this with every beat of my heart —
+I love you more than myself, more than words,
+more than time itself.
+I genuinely cannot imagine my world without you.
+
+You are my Valentine forever ♾️🩷,
+my peace, my solace, my divine affection.
+You’re my angel, my miracle, my everything.
+
+I promise with all my heart —
+I will never let you down,
+never walk away,
+never stop choosing you.
+
+You’re my creamy sugar honey bunny 🍯
+my apple pie 🥧
+my moonlight 🌙
+my crown 👑
+my eternal happiness
+and my eternal love 🌹💓🫠💋💞
+`;
+
+function typeText(element, text, speed = 45) {
+  let i = 0;
+  element.innerHTML = "";
+  const interval = setInterval(() => {
+    element.innerHTML += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, speed);
+}
