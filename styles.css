@@ -145,6 +145,15 @@ button {
     transform: translateY(120vh) rotate(360deg);
     opacity: 0.85;
   }
+  .heart {
+  animation: fall linear infinite, pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
 }
 .love-card {
   background: rgba(255, 255, 255, 0.12);
