@@ -16,9 +16,24 @@ const music = document.getElementById('bgMusic');
 // 💖 YES CLICK ACTION
 yesBtn.addEventListener('click', () => {
   celebrate.style.display = 'flex';
-  music.volume = 0.6;
-  music.play();
-  heartRain();
+
+  music.currentTime = 0;
+  music.volume = 0;
+  music.play().catch(() => {});
+
+  // smooth fade-in
+  let v = 0;
+  const fade = setInterval(() => {
+    if (v < 0.7) {
+      v += 0.04;
+      music.volume = v;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+
+  startHeartRain();
+  typeText(document.getElementById('typedText'), loveMessage);
 });
 
 // 🌧️ HEART RAIN
